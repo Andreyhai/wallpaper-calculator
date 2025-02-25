@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Andreyhai.github.io/wallpaper-calculator/",
+  "homepage": "https://andreyhai.github.io/wallpaper-calculator/",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
