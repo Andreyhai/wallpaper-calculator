@@ -1,0 +1,124 @@
+body {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+button:focus {
+  outline: none;  // Убираем рамку при клике и фокусе
+  box-shadow: none; // Убираем возможное свечение
+}
+
+.modalWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.modalInner {
+  padding: 20px clamp(20px, 10vw, 100px); // Отступы адаптивные от 20px до 100px
+}
+
+.modalInnerSettings {
+  padding: 20px clamp(20px, 10vw, 100px); // Отступы адаптивные от 20px до 100px
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: left;
+  color: #000;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap; // Если не помещаются, переносятся
+}
+
+.blueButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #526EFF;
+
+  &:hover {
+    background-color: #526EFF; // Темнее при наведении
+    color: white;
+  }
+
+  // &:active {
+  //   transform: scale(0.95); // Лёгкий эффект нажатия
+  //   background-color: #526EFF;
+  //   bor
+  // }
+}
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.blueButtonActive {
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  // background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  transform: scale(0.95); // Лёгкий эффект нажатия
+    background-color: #526EFF;
+}
+
+
+@media (max-width: 768px) {
+  .inputGroup {
+    flex-direction: column;
+  }
+
+  .modalInnerSettings {
+    flex-direction: column;
+  }
+}
+

@@ -5,14 +5,15 @@ import { motion } from "framer-motion"; // Импортируем framer-motion
 interface IconButtonProps {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
   text: string;
-  onClick?: () => void;
+  openCalculator: () => void;
 }
 
 const ModalHello: React.FC<IconButtonProps> = ({
   icon: Icon,
   text,
-  onClick,
+  openCalculator
 }) => {
+
   return (
     <motion.div
     initial={{ y: -100, opacity: 0 }}  // Начальное положение и прозрачность
@@ -32,7 +33,7 @@ const ModalHello: React.FC<IconButtonProps> = ({
         <motion.button
           whileTap={{ scale: 0.9 }} // Сжимается при клике
           transition={{ duration: 0.03 }}
-          onClick={onClick}
+          onClick={openCalculator}
           className={styles.button}
         >
           <Icon className={styles.buttonIcon} aria-hidden="true" />

@@ -1,70 +1,132 @@
-/* ModalHello.module.scss */
 body {
-    background-color: rgba(0, 0, 0, 0.3); /* Легкий затемненный фон для подложки */
+  background-color: rgba(0, 0, 0, 0.3); /* Легкий затемненный фон для подложки */
 }
+
 .modalWrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
-  }
-  
-  .modalContent {
-    background-color: #fff; /* Белый фон для модалки */
-    color: #000; /* Черный текст по умолчанию */
-    border-radius: 10px;
-    padding: 30px 50px;
-    max-width: 500px;
-    width: 100%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для модалки */
-    text-align: center;
-  }
-  
-  .modalContent h1 {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    text-align: left;
-  }
-  
-  .modalContent p {
-    font-size: 16px;
-    margin: 32px 0;
-    text-align: left;
-  }
-  
-  .button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.modalContent {
+  background-color: #fff; /* Белый фон для модалки */
+  color: #000; /* Черный текст по умолчанию */
+  border-radius: 10px;
+  padding: 30px 50px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Тень для модалки */
+  text-align: center;
+  box-sizing: border-box; /* Чтобы padding не выходил за пределы ширины */
+
+  // @media (max-width: 1024px) {
+  //   padding: 25px 40px;
+  // }
+
+  @media (max-width: 768px) {
+    padding: 20px 30px;
     border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin: 0 auto;
-  
-    &:hover {
-      background-color: #0056b3;
-      transform: scale(1.06);
-    }
-  
-    &:focus {
-      outline: none;
-    }
+    width: 500px;
   }
-  
-  .buttonIcon {
-    width: 24px;
-    height: 24px;
+
+  @media (max-width: 728px) {
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 450px;
   }
-  
+  @media (max-width: 728px) {
+    padding: 20px 30px;
+    border-radius: 8px;
+    width: 450px;
+  }
+
+  @media (max-width: 460px) {
+    padding: 15px 20px; /* Уменьшаем паддинг */
+    width: calc(100% - 20px); /* Увеличиваем ширину, чтобы использовать почти весь экран, отнимаем 20px для отступов */
+    border-radius: 6px; /* Немного уменьшаем скругление углов */
+    margin: 10px; /* Устанавливаем отступы от экрана минимум 10px */
+  }
+}
+
+.modalContent h1 {
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 20px; /* Уменьшаем размер шрифта для маленьких экранов */
+    margin-bottom: 12px;
+  }
+}
+
+.modalContent p {
+  font-size: 16px;
+  margin: 32px 0;
+  text-align: left;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    margin: 24px 0;
+  }
+
+  @media (max-width: 390px) {
+    font-size: 12px; /* Уменьшаем размер текста */
+    margin: 16px 0; /* Уменьшаем отступы */
+  }
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.06);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 390px) {
+    padding: 6px 12px; /* Уменьшаем паддинг */
+    font-size: 12px; /* Уменьшаем шрифт */
+  }
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+
+  @media (max-width: 390px) {
+    width: 20px; /* Уменьшаем размер иконки */
+    height: 20px;
+  }
+}
