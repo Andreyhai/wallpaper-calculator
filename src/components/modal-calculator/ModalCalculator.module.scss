@@ -1,0 +1,211 @@
+body {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+button:focus {
+  outline: none;  // Убираем рамку при клике и фокусе
+  box-shadow: none; // Убираем возможное свечение
+}
+
+.modalWrapper {
+  position: absolute; // Делаем модалку частью документа, а не фиксированной
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh; // Минимальная высота — вся высота экрана
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; // Прижимаем к верху, а не центрируем
+  padding: 40px 0; // Отступ сверху и снизу, чтобы было место для скролла
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow-y: auto; // Позволяем скроллить всю страницу
+}
+
+.modalContent {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding: 20px;
+}
+
+.modalInner {
+  padding: 20px clamp(20px, 10vw, 100px); // Отступы адаптивные от 20px до 100px
+}
+
+.modalInnerLast {
+    margin: 20px clamp(20px, 10vw, 100px);
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #526EFF;
+}
+
+.modalInnerSettings {
+  padding: 20px clamp(20px, 10vw, 100px); // Отступы адаптивные от 20px до 100px
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.modalTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: left;
+  color: #000;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap; // Если не помещаются, переносятся
+}
+
+.blockGroup {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; // Если не помещаются, переносятся
+}
+
+.blueButton {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #526EFF;
+
+  &:hover {
+    background-color: #526EFF; // Темнее при наведении
+    color: white;
+  }
+
+  // &:active {
+  //   transform: scale(0.95); // Лёгкий эффект нажатия
+  //   background-color: #526EFF;
+  //   bor
+  // }
+}
+
+.blueButtonLong {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: #526EFF;
+  width: 140px;
+
+  &:hover {
+    background-color: #526EFF; // Темнее при наведении
+    color: white;
+  }
+
+  // &:active {
+  //   transform: scale(0.95); // Лёгкий эффект нажатия
+  //   background-color: #526EFF;
+  //   bor
+  // }
+}
+.buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.blueButtonActive {
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  // background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  transform: scale(0.95); // Лёгкий эффект нажатия
+    background-color: #526EFF;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  // margin: 0 auto;
+
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.06);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media (max-width: 768px) {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 390px) {
+    padding: 6px 12px; /* Уменьшаем паддинг */
+    font-size: 12px; /* Уменьшаем шрифт */
+  }
+}
+
+.buttonIcon {
+  width: 24px;
+  height: 24px;
+
+  @media (max-width: 390px) {
+    width: 20px; /* Уменьшаем размер иконки */
+    height: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .inputGroup, .inputGroup {
+    flex-direction: column;
+  }
+
+  .modalInnerSettings {
+    flex-direction: column;
+  }
+}
+
