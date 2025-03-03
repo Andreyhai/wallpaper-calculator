@@ -5,7 +5,7 @@ import InputBlock from "../shared/input/InputBlock";
 import AddBlock from "../shared/add-block/AddBlock";
 import fileSVG from "../../assets/file.svg?react";
 import EditBlock from "../shared/edit-block/EditBlock";
-import { label } from "framer-motion/client";
+// import { label } from "framer-motion/client";
 import Result from "../shared/Result/Result";
 
 interface ModalCalculatorProps {
@@ -17,6 +17,42 @@ interface WindowObject {
   id: number;
   width: string;
   height: string;
+}
+
+type WallpaperParams = {
+  roomLength: number;
+  roomWidth: number;
+  roomHeight: number;
+  rollWidth: number;
+  rollLength: number;
+  rapport: number;
+};
+
+function calculateWallpaper({
+  roomLength,
+  roomWidth,
+  roomHeight,
+  rollWidth,
+  rollLength,
+  rapport,
+}: WallpaperParams) {
+  
+  const perimeter = 2 * (roomLength + roomWidth);
+  const stripHeight = rapport > 0 ? Math.ceil(roomHeight / rapport) * rapport : roomHeight;
+  const stripsPerRoll = stripHeight <= rollLength ? Math.floor(rollLength / stripHeight) : 1;
+  const totalStrips = Math.ceil(perimeter / rollWidth);
+  
+  const rollsNeeded = Math.ceil(totalStrips / stripsPerRoll);
+  
+  const wallArea = perimeter * roomHeight;
+
+  const wallpaperArea = rollsNeeded * rollWidth * rollLength;
+  
+  return {
+    rollsNeeded,
+    wallArea,
+    wallpaperArea,
+  };
 }
 
 const ModalCalculator: React.FC<ModalCalculatorProps> = ({
@@ -31,24 +67,30 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
   const [windowsArray, setWindowsArray] = useState<WindowObject[]>([]);
   const [doorsArray, setDoorsArray] = useState<WindowObject[]>([]);
   const [isResultVisible, setIsResultVisible] = useState<boolean>(false)
-  const paramsValues = ["1.06 x 10м", "1.06 x 25м"];
+  const [results, setResults] = useState([
+    { label: "Кол-во рулонов", value: "" },
+    { label: "Кол-во m² обоев", value: "" },
+    { label: "Площадь оклейки", value: "" },
+  ]);
+
+  const paramsValues = ["1.06 x 10", "1.06 x 25"];
   const raportValues = ["0", "0.32", "0.64"];
 
-  const results = [
-    {
-      label: 'Кол-во рулонов',
-      value: '57'
-    },
-    {
-      label: 'Кол-во m2 обоев',
-      value: '604.2 м2'
-    },
-    {
-      label: 'Площадь оклейки',
-      value: '1800 м2'
-    },
+  function handleCalculate(params: WallpaperParams) {
+    const result = calculateWallpaper(params);
+  
+    setResults([
+      { label: "Кол-во рулонов", value: result.rollsNeeded.toString() },
+      { label: "Кол-во m² обоев", value: `${result.wallpaperArea.toFixed(2)} м²` },
+      { label: "Площадь оклейки", value: `${result.wallArea.toFixed(2)} м²` },
+    ]);
+  }
 
-  ]
+  useEffect(() => {
+    console.log("windowsArray ===> ", windowsArray)
+    console.log("doorsArray ===> ", doorsArray)
+
+  }, [windowsArray, doorsArray])
 
   const onChangeLength = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLength(event.target.value);
@@ -89,9 +131,32 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
     setDoorsArray((prev) => prev.filter((door) => door.id !== index));
   }
 
-  useEffect(() => {
-    // console.log(windowsArray)
-  }, [windowsArray])
+  const updateDoor = (index: number, field: "width" | "height", value: string) => {
+    setDoorsArray((prevDoors) =>
+      prevDoors.map((door) =>
+        door.id === index ? { ...door, [field]: value } : door
+      )
+    );
+  };
+
+  const updateWindow = (index: number, field: "width" | "height", value: string) => {
+    setWindowsArray((prevWindows) =>
+      prevWindows.map((window) =>
+        window.id === index ? { ...window, [field]: value } : window
+      )
+    );
+  };
+
+  const reset = () => {
+    setLength('1')
+    setWidth('1')
+    setHeight('1')
+    setDoorsArray([])
+    setWindowsArray([])
+    setIsResultVisible(false)
+    setSelectedParam(0)
+    setSelectedRaport(0)
+  }
 
   return (
     <motion.section
@@ -188,7 +253,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
           <article className={styles.blockGroup}>
 
             {windowsArray.map((window) => {
-              return <EditBlock title={'Окно'} removeWindow={removeWindow} lastWidth={window.width} lastHeight={window.height} index={window.id} />;
+              return <EditBlock title={'Окно'} removeWindow={removeWindow} lastWidth={window.width} lastHeight={window.height} index={window.id} updateDoor={updateWindow} />;
             })}
             <AddBlock title="Добавить окно" icon={fileSVG} addWindow2Array={addWindow2Array} />
           </article>
@@ -199,7 +264,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
           <article className={styles.blockGroup}>
 
             {doorsArray.map((door) => {
-              return <EditBlock title={'Дверь'} removeWindow={removeDoor} lastWidth={door.width} lastHeight={door.height} index={door.id} />;
+              return <EditBlock title={'Дверь'} removeWindow={removeDoor} lastWidth={door.width} lastHeight={door.height} index={door.id} updateDoor={updateDoor} />;
             })}
             <AddBlock title="Добавить дверь" icon={fileSVG} addWindow2Array={addDoor2Array} />
           </article>
@@ -208,7 +273,17 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
           <motion.button
             whileTap={{ scale: 0.9 }} // Сжимается при клике
             transition={{ duration: 0.03 }}
-            onClick={() => setIsResultVisible(true)}
+            onClick={() => {
+              setIsResultVisible(true)
+              handleCalculate({
+                roomLength: parseFloat(length),
+                roomWidth: parseFloat(width),
+                roomHeight: parseFloat(height),
+                rollWidth: parseFloat(paramsValues[selectedParam].split('x')[0]),
+                rollLength: parseFloat(paramsValues[selectedParam].split('x')[1]),
+                rapport: parseFloat(raportValues[selectedRaport]),
+              })
+            }}
             className={styles.button}
           >
             <Icon className={styles.buttonIcon} aria-hidden="true" />
@@ -218,7 +293,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
 
         {isResultVisible && (
           <section className={styles.modalInner}>
-            <Result results={results} />
+            <Result results={results} reset={reset}/>
           </section>
         )}
       </article>

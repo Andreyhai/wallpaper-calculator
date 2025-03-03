@@ -208,4 +208,8 @@ button:focus {
     flex-direction: column;
   }
 }
-
+@media (max-width: 600px) {
+  .blockGroup {
+    justify-content: center;
+  }
+}
