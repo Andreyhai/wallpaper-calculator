@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ModalCalculator.module.scss"; // Импортируем стили
-import { motion } from "framer-motion"; // Импортируем framer-motion
+import styles from "./ModalCalculator.module.scss";
+import { motion } from "framer-motion";
 import InputBlock from "../shared/input/InputBlock";
 import AddBlock from "../shared/add-block/AddBlock";
 import fileSVG from "../../assets/file.svg?react";
 import EditBlock from "../shared/edit-block/EditBlock";
-// import { label } from "framer-motion/client";
 import Result from "../shared/Result/Result";
 
 interface ModalCalculatorProps {
@@ -26,6 +25,8 @@ type WallpaperParams = {
   rollWidth: number;
   rollLength: number;
   rapport: number;
+  windows: WindowObject[];
+  doors: WindowObject[];
 };
 
 function calculateWallpaper({
@@ -35,7 +36,15 @@ function calculateWallpaper({
   rollWidth,
   rollLength,
   rapport,
+  windows,
+  doors
 }: WallpaperParams) {
+
+  let windowsAndDoorsSquare = 0
+  
+  windows.map((window) => {windowsAndDoorsSquare += parseFloat(window.height) * parseFloat(window.width)})
+  doors.map((door) => {windowsAndDoorsSquare += parseFloat(door.height) * parseFloat(door.width)})
+
   
   const perimeter = 2 * (roomLength + roomWidth);
   const stripHeight = rapport > 0 ? Math.ceil(roomHeight / rapport) * rapport : roomHeight;
@@ -44,7 +53,7 @@ function calculateWallpaper({
   
   const rollsNeeded = Math.ceil(totalStrips / stripsPerRoll);
   
-  const wallArea = perimeter * roomHeight;
+  const wallArea = perimeter * roomHeight - windowsAndDoorsSquare;
 
   const wallpaperArea = rollsNeeded * rollWidth * rollLength;
   
@@ -107,7 +116,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
 
   const addWindow2Array = () => {
     const newWindow: WindowObject = {
-      id: windowsArray.length, // Генерируем уникальный id
+      id: windowsArray.length,
       width: '0',
       height: '0',
     };
@@ -116,7 +125,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
 
   const addDoor2Array = () => {
     const newDoor: WindowObject = {
-      id: doorsArray.length, // Генерируем уникальный id
+      id: doorsArray.length,
       width: '0',
       height: '0',
     };
@@ -237,7 +246,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
                 <button
                   className={
                     selectedRaport === index
-                      ? styles.blueButtonActive
+                      ? buttonText !== '0' ? styles.blueButtonActiveLong : styles.blueButtonActive
                       : buttonText !== '0' ? styles.blueButtonLong : styles.blueButton
                   }
                   onClick={() => setSelectedRaport(index)}
@@ -271,7 +280,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
         </section>
         <section className={styles.modalInner}>
           <motion.button
-            whileTap={{ scale: 0.9 }} // Сжимается при клике
+            whileTap={{ scale: 0.9 }}
             transition={{ duration: 0.03 }}
             onClick={() => {
               setIsResultVisible(true)
@@ -282,6 +291,8 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
                 rollWidth: parseFloat(paramsValues[selectedParam].split('x')[0]),
                 rollLength: parseFloat(paramsValues[selectedParam].split('x')[1]),
                 rapport: parseFloat(raportValues[selectedRaport]),
+                windows: windowsArray,
+                doors: doorsArray
               })
             }}
             className={styles.button}

@@ -1,4 +1,4 @@
-.input-block {
+.inputBlock {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -7,19 +7,19 @@
     max-width: 300px;
     width: clamp(100px, 30vw, 300px); // Адаптивная ширина
 
-    .input-label {
+    .inputLabel {
         font-size: 14px;
         font-weight: 500;
         color: #333;
         text-align: left;
     }
 
-    .input-unit {
+    .inputUnit {
         font-size: 12px;
         color: #666;
     }
 
-    .input-field {
+    .inputField {
         padding: 8px 12px;
         font-size: 16px;
         border: 1px solid #ccc;
@@ -34,7 +34,7 @@
 }
 
 @media (max-width: 768px) {
-    .input-block {
+    .inputBlock {
         width: 100%;
         // margin: 0 auto;
     }

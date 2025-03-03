@@ -98,12 +98,6 @@ button:focus {
     background-color: #526EFF; // Темнее при наведении
     color: white;
   }
-
-  // &:active {
-  //   transform: scale(0.95); // Лёгкий эффект нажатия
-  //   background-color: #526EFF;
-  //   bor
-  // }
 }
 
 .blueButtonLong {
@@ -126,12 +120,6 @@ button:focus {
     background-color: #526EFF; // Темнее при наведении
     color: white;
   }
-
-  // &:active {
-  //   transform: scale(0.95); // Лёгкий эффект нажатия
-  //   background-color: #526EFF;
-  //   bor
-  // }
 }
 .buttons {
   display: flex;
@@ -154,6 +142,24 @@ button:focus {
     background-color: #526EFF;
 }
 
+.blueButtonActiveLong {
+  justify-content: center;
+  align-items: center;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  // background-color: rgba(82, 110, 255, 0.12); // Насыщенный синий
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  transform: scale(0.95); // Лёгкий эффект нажатия
+    background-color: #526EFF;
+  width: 140px;
+
+}
+
 .button {
   display: flex;
   align-items: center;
@@ -167,7 +173,6 @@ button:focus {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
-  // margin: 0 auto;
 
   &:hover {
     background-color: #0056b3;
@@ -184,8 +189,8 @@ button:focus {
   }
 
   @media (max-width: 390px) {
-    padding: 6px 12px; /* Уменьшаем паддинг */
-    font-size: 12px; /* Уменьшаем шрифт */
+    padding: 6px 12px; 
+    font-size: 12px; 
   }
 }
 
@@ -194,7 +199,7 @@ button:focus {
   height: 24px;
 
   @media (max-width: 390px) {
-    width: 20px; /* Уменьшаем размер иконки */
+    width: 20px; 
     height: 20px;
   }
 }

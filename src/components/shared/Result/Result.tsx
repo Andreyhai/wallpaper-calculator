@@ -24,16 +24,16 @@ const Result: React.FC<ResultProps> = ({ results, reset }) => {
       <h1 className={styles.title}>Результаты</h1>
       <article className={styles.resultContainer}>
         {results.map((result, index) => (
-          <div key={index} className={styles.resultItem}>
+          <article key={index} className={styles.resultItem}>
             <h2 className={styles.resultValue}>{result.value}</h2>
             <p className={styles.resultLabel}>{result.label}</p>
-          </div>
+          </article>
         ))}
       </article>
-      <div className={styles.buttonGroup}>
+      <article className={styles.buttonGroup}>
         <button className={styles.resetButton} onClick={() => reset()}>Сбросить параметры</button>
         <button className={styles.catalogButton}>Перейти в каталог</button>
-      </div>
+      </article>
     </motion.section>
   );
 };

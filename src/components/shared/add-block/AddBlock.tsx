@@ -10,12 +10,12 @@ interface AddBlockProps {
 
 const AddBlock: React.FC<AddBlockProps> = ({title, icon: Icon, addWindow2Array}) => {
   return (
-    <div className={styles.addWindow} onClick={addWindow2Array}>
-      <div className={styles.iconContainer}>
+    <article className={styles.addWindow} onClick={addWindow2Array}>
+      <article className={styles.iconContainer}>
       <Icon className={styles.icon} aria-hidden="true" />
-      </div>
+      </article>
       <p className={styles.text}>{title}</p>
-    </div>
+    </article>
   );
 };
 

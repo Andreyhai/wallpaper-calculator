@@ -21,40 +21,38 @@ const EditBlock: React.FC<EditBlockProps> = ({
   index,
   updateDoor
 }) => {
-  // const [height, setHeight] = useState<string>(lastHeight);
-  // const [width, setWidth] = useState<string>(lastWidth);
 
   return (
-    <motion.div
-    initial={{ x: -100, opacity: 0 }}  // Начальное положение и прозрачность
-      animate={{ x: 0, opacity: 1 }}  // Конечное положение и прозрачность
-      transition={{ type: "spring", stiffness: 100, duration: 0.8 }}  // Пружинная анимация
+    <motion.article
+    initial={{ x: -100, opacity: 0 }}  
+      animate={{ x: 0, opacity: 1 }}  
+      transition={{ type: "spring", stiffness: 100, duration: 0.8 }}  
     className={styles.windowBlock}>
-      <div className={styles.header}>
+      <article className={styles.header}>
         <h3>{title}</h3>
         <button className={styles.closeButton} onClick={() => removeWindow(index)}>
           ✖
         </button>
-      </div>
-      <div className={styles.inputs}>
-        <div className={styles.inputGroup}>
+      </article>
+      <article className={styles.inputs}>
+        <article className={styles.inputGroup}>
           <label>Высота м</label>
           <input
             type="text"
             value={lastHeight}
             onChange={(e) => updateDoor(index, "height", e.target.value)}
           />
-        </div>
-        <div className={styles.inputGroup}>
+        </article>
+        <article className={styles.inputGroup}>
           <label>Ширина м</label>
           <input
             type="text"
             value={lastWidth}
             onChange={(e) => updateDoor(index, "width", e.target.value)}
           />
-        </div>
-      </div>
-    </motion.div>
+        </article>
+      </article>
+    </motion.article>
   );
 };
 
