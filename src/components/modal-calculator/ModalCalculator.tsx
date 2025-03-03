@@ -262,7 +262,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
           <article className={styles.blockGroup}>
 
             {windowsArray.map((window) => {
-              return <EditBlock title={'Окно'} removeWindow={removeWindow} lastWidth={window.width} lastHeight={window.height} index={window.id} updateDoor={updateWindow} />;
+              return <EditBlock title={'Окно'} removeWindow={removeWindow} lastWidth={window.width} lastHeight={window.height} index={window.id} updateDoor={updateWindow} width={width} height={height} />;
             })}
             <AddBlock title="Добавить окно" icon={fileSVG} addWindow2Array={addWindow2Array} />
           </article>
@@ -273,7 +273,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
           <article className={styles.blockGroup}>
 
             {doorsArray.map((door) => {
-              return <EditBlock title={'Дверь'} removeWindow={removeDoor} lastWidth={door.width} lastHeight={door.height} index={door.id} updateDoor={updateDoor} />;
+              return <EditBlock title={'Дверь'} removeWindow={removeDoor} lastWidth={door.width} lastHeight={door.height} index={door.id} updateDoor={updateDoor} height={height} width={width} />;
             })}
             <AddBlock title="Добавить дверь" icon={fileSVG} addWindow2Array={addDoor2Array} />
           </article>
