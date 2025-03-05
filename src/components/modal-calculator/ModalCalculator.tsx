@@ -7,6 +7,8 @@ import fileSVG from "../../assets/file.svg?react";
 import EditBlock from "../shared/edit-block/EditBlock";
 import Result from "../shared/Result/Result";
 import ModalError from "../modal-error/ModalError";
+import ModalSend from "../modal-send/ModalSend";
+import emailSVG from '../../assets/email.svg?react'
 
 interface ModalCalculatorProps {
   openCalculator: () => void;
@@ -78,13 +80,20 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
   const [doorsArray, setDoorsArray] = useState<WindowObject[]>([]);
   const [isResultVisible, setIsResultVisible] = useState<boolean>(false)
   const [errorText, setErrorText] = useState<string | null>(null);
+  const [isModalSendOpened, setIsModalSendOpened] = useState<boolean>(false)
   const [results, setResults] = useState([
     { label: "Кол-во рулонов", value: "" },
     { label: "Кол-во m² обоев", value: "" },
     { label: "Площадь оклейки", value: "" },
   ]);
 
-  
+  const openModalSend = () => {
+    setIsModalSendOpened(true)
+  }
+
+  const closeModalSend = () => {
+    setIsModalSendOpened(false)
+  }
 
   const closeModal = () => {
     setErrorText(null);
@@ -203,6 +212,8 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
   return (
     <>
     {errorText && <ModalError title={errorText} onClose={closeModal} />}
+    {isModalSendOpened && <ModalSend icon={emailSVG} results={results} doorsArray={doorsArray} windowsArray={windowsArray} length={length} width={width} height={height} onClose={closeModalSend} />}
+
     <motion.section
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -331,7 +342,7 @@ const ModalCalculator: React.FC<ModalCalculatorProps> = ({
 
         {isResultVisible && (
           <section className={styles.modalInner}>
-            <Result results={results} reset={reset}/>
+            <Result results={results} reset={reset} openModalSend={openModalSend}/>
           </section>
         )}
       </article>

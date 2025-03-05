@@ -1,0 +1,159 @@
+.modal {
+    position: fixed;
+    top: 40%;
+    // left: 50vw;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1001; // Поверх затемнения
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        color: black;
+        margin-bottom: 15px;
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin: 20px 0 10px 0;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        // margin-top: 50px;
+
+        .inputArticle {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            text-align: left;
+            position: relative;
+            left: 10px;
+        }
+
+        .input {
+            min-width: 300px;
+            max-width: 200px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+
+            &:focus {
+                border-color: #007bff;
+                box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+            }
+        }
+
+        .sendButton {
+            background: #007bff;
+            color: white;
+            padding: 10px 10px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            width: fit-content;
+            margin: 10px auto 0 auto;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+
+            &:hover {
+                background: #0056b3;
+            }
+            &Text {
+                
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    .closeButton {
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: #333;
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
+
+// Затемнённый фон
+.modalBackdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); // Полупрозрачный чёрный фон
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; // Чуть ниже модалки
+}
+
+@media (max-width: 768px) {
+    .modal {
+        .form {
+        .input {
+            min-width: 250px;
+        }
+    }
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .modal {
+        .form {
+        .input {
+            min-width: 200px;
+        }
+    }
+    }
+    
+}
+
+.error {
+    color: red;
+    padding: 0 10px;
+    margin: 0;
+    font-size: 10px;
+    text-align: left;
+}
+
+.buttonIcon {
+    width: 20px;
+    height: 20px;
+}

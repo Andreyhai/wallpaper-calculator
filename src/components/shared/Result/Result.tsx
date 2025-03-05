@@ -10,15 +10,16 @@ interface ResultItem {
 interface ResultProps {
   results: ResultItem[];
   reset: () => void;
+  openModalSend: () => void;
 }
 
-const Result: React.FC<ResultProps> = ({ results, reset }) => {
+const Result: React.FC<ResultProps> = ({ results, reset, openModalSend }) => {
   return (
     <motion.section
       key={JSON.stringify(results)}
-      initial={{ y: -100, opacity: 0 }} // Начальное положение и прозрачность
-      animate={{ y: 0, opacity: 1 }} // Конечное положение и прозрачность
-      transition={{ type: "spring", stiffness: 100, duration: 0.8 }} // Пружинная анимация
+      initial={{ y: -100, opacity: 0 }} 
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100, duration: 0.8 }}
       className={styles.section}
     >
       <h1 className={styles.title}>Результаты</h1>
@@ -31,8 +32,9 @@ const Result: React.FC<ResultProps> = ({ results, reset }) => {
         ))}
       </article>
       <article className={styles.buttonGroup}>
-        <button className={styles.resetButton} onClick={() => reset()}>Сбросить параметры</button>
+        <button className={styles.resetButton} onClick={reset}>Сбросить параметры</button>
         <button className={styles.catalogButton}>Перейти в каталог</button>
+        <button className={styles.buttonSend} onClick={openModalSend}>Отправить на почту</button>
       </article>
     </motion.section>
   );

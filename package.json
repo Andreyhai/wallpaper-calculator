@@ -12,6 +12,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@types/react-router-dom": "^5.3.3",
     "framer-motion": "^12.4.7",
     "react": "^19.0.0",

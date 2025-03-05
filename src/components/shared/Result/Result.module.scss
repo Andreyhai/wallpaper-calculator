@@ -78,18 +78,25 @@
         text-align: center;
         white-space: nowrap;
 
-        &:first-child {
-            background-color: white;
-            color: black;
-        }
-
-        &:last-child {
-            background-color: white;
-            color: green;
-        }
+        
 
         &:hover {
             opacity: 0.8;
         }
+    }
+
+    .resetButton {
+        background-color: white;
+        color: black;
+    }
+
+    .catalogButton {
+        background-color: white;
+        color: green;
+    }
+
+    .buttonSend {
+        background: white;
+        color: rgb(45, 115, 245);
     }
 }
